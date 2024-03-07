@@ -1,0 +1,8 @@
+ADD
+
+CHANGE PASSWORD
+CHANGE EMAIL
+---- SOLUTION: CAN EDIT THE edit/user path have 2 options 
+
+VALIDATIONS - date with full message
+testing

@@ -1,0 +1,27 @@
+        <%= form_with(model: task, url: category_task_path(category, task), class: 'w-full flex flex-col items-center gap-y-2 p-2') do |f| %>
+            <div class="w-3/4">
+            <%= f.text_field :name, class: "w-full rounded-lg focus:ring-2 focus:ring-pal-100 focus:border-none", placeholder: "Name", required: true %>
+            </div>
+            <div class="w-3/4 p-0">
+            <%= f.text_area :description, class: "w-full rounded-lg resize-none focus:ring-2 focus:ring-pal-100 focus:border-none", placeholder: "Description", required: true %>
+            </div>
+
+            <div class="w-3/4 flex items-center">
+            <%= f.label :due_date, class: 'text-white pr-2' %>
+            <%= f.date_field :due_date, class: 'rounded-lg grow focus:ring-2 focus:ring-pal-100 focus:border-none' %>
+            </div>
+
+            <div class="w-3/4 flex items-center">
+            <%= f.label :priority_level, class: 'text-white pr-2' %>
+            <%= f.select :priority_level, ['Low', 'High'], {}, { class: 'rounded-lg grow focus:ring-2 focus:ring-pal-100 focus:border-none' } %>
+            </div>
+
+            <div class="w-3/4 flex items-center">
+            <%= f.label :status, class: 'text-white pr-2' %>
+            <%= f.select :status, ['Pending', 'Completed'], {}, { class: 'rounded-lg grow focus:ring-2 focus:ring-pal-100 focus:border-none' } %>
+            </div>
+
+            <div class="w-full flex justify-center">
+            <%= f.submit "SUBMIT", class: "py-2 w-1/2 bg-pal-300 rounded-md text-white shadow-md" %>
+            </div>
+        <% end %>

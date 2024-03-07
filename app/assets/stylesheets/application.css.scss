@@ -1,0 +1,60 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ @import "font-awesome";
+
+ body {
+    background-color: #1B2024ff;
+    font-family: 'Nunito';
+ }
+
+ .noscroll::-webkit-scrollbar {
+   display: none;
+ }
+ 
+ /* Hide scrollbar for IE, Edge and Firefox */
+ .noscroll {
+   -ms-overflow-style: none;  /* IE and Edge */
+   scrollbar-width: none;  /* Firefox */
+ }
+
+.remove-arrow::-webkit-inner-spin-button,
+.remove-arrow::-webkit-outer-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+}
+.remove-arrow {
+   -moz-appearance: textfield;
+}
+
+.side_link {
+   background: linear-gradient(90deg, rgba(253,63,57,0.20) 0%, rgba(253,63,57,0.15) 25%, rgba(253,63,57,0.10) 50%, rgba(253,63,57,0.05) 75%, rgba(253,63,57,0) 100%);}
+
+.yellow-bg {
+   background-color: rgba(254, 189, 40, 0.1);
+}
+
+.green-bg {
+   background-color: rgba(87, 158, 81, 0.1);
+}
+
+.red-bg {
+   background-color: rgba(253, 63, 57, 0.1)
+}
+
+.blue-bg {
+   background-color: rgba(0, 119, 243, 0.5)
+
+}

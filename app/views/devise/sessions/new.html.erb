@@ -1,0 +1,40 @@
+<div class = 'w-full h-full flex justify-center items-center bg-pal-100'>
+  <div class = 'w-1/4 h-3/6 bg-pal-200 rounded-lg shadow-md flex flex-col justify-center items-center divide-y divide-pal-500'>
+    <div class = "w-4/5 flex flex-col justify-center items-center pb-2">
+      <div class = 'w-full p-2 flex justify-center items-center'>
+        <%= image_tag("brand.png", :alt => "trckr logo", class: 'w-2/5') %>
+      </div>
+      <div class = 'w-4/5 p-2 flex justify-center items-center'>
+        <p class= "text-2xl text-center text-white">Sign-in to Tracker!</p>
+      </div>
+      <div class = "w-4/5">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "w-full py-2" }) do |f| %>
+          <div class="field w-full pt-2 flex flex-col justify-center items-center">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'Email', class: "w-full rounded-md focus:ring-2 focus:ring-pal-100 focus:border-none" %>
+          </div>
+
+          <div class="field w-full pt-2 flex flex-col justify-center items-center">
+            <%= f.password_field :password, autocomplete: "current-password", placeholder: 'Password', class: "w-full rounded-md focus:ring-2 focus:ring-pal-100 focus:border-none" %>
+          </div>
+
+          <% if alert == "Invalid Email or password." %>
+            <p class="alert alert-danger text-center text-red-500 text-sm">Wrong Credentials. Please Try Again.</p>
+          <% end %>
+
+          <div class="actions w-full pt-5 flex flex-col justify-center items-center">
+            <%= f.submit "Log in", class: 'py-2 w-2/3 bg-pal-500 rounded-md text-white' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class = "w-4/5 flex flex-col py-2 justify-center items-center">
+      <div class = "w-4/5 flex flex-col justify-center items-center">
+        <div class="actions w-full pt-2 flex flex-col justify-center items-center">
+          <%= link_to "Sign-up", new_registration_path(resource_name), class: 'py-2 w-2/3 bg-pal-500 rounded-md text-white text-center' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>

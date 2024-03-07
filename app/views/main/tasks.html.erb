@@ -1,0 +1,167 @@
+<div class = "w-full flex">
+  <%= render 'shared/sidebar' %>
+  <div class = 'grow h-screen p-5 flex flex-col justify-between items-center'>
+    <div class = 'w-full h-full rounded-lg flex gap-x-6 px-2'>
+
+      <div class = 'w-1/3 h-full flex flex-col'>
+        
+        <div class = 'w-full h-full'>
+          <div class = 'w-full h-full bg-pal-200 rounded-lg p-4'>
+            <div class = 'w-full h-full overflow-scroll noscroll'>
+              <div class = 'w-full flex gap-x-2'>
+                <div class = 'p-2 bg-zinc-700 size-16 flex justify-center items-center rounded-lg'>
+                  <i class="fa-solid fa-spinner text-4xl text-white"></i>
+                </div>
+                <div class = 'p-2 size-16 flex flex-col justify-center items-start rounded-lg grow'>
+                  <p class = 'text-lg font-semibold text-white'>Pending Tasks</p>
+                  <p class = 'text-sm text-neutral-500 font-semibold'><%= @pending_task_count %> Pending Tasks</p>
+                </div>
+              </div>
+              <div class = 'w-full flex flex-col justify-center items-center py-4 px-4 gap-y-1'>
+                <% if @pending_task_count != 0 %>
+                  <% @pending_tasks.each do |task| %>
+                    <div class = 'w-full flex'>
+                      <%= link_to category_task_path(task.category_id, task.id), class: 'w-full h-full flex gap-x-2' do %>
+                        <div class = 'p-2 w-16 flex justify-center items-center rounded-lg'>
+                          <i class="fa-regular fa-circle-check text-4xl text-white"></i>
+                        </div>
+                        <div class = 'p-2 flex flex-col justify-center items-start rounded-lg grow'>
+                          <p class = 'text-lg font-semibold text-white'><%= task.name %></p>
+                          <p class = 'text-sm text-neutral-500 font-semibold'><%= task.description %></p>
+                          <p class = 'text-sm text-neutral-500 font-semibold'>Due Date: <%= task.updated_due_date %></p>
+                          <div class = 'flex gap-x-2'>
+                            <% if task.priority_level == 'High'%>
+                              <p class = 'text-sm text-pal-500 font-semibold red-bg px-2 rounded'><%= task.priority_level %> Priority</p>
+                            <% else %>
+                              <p class = 'text-sm text-pal-800 font-semibold green-bg px-2 rounded'><%= task.priority_level %> Priority</p>
+                            <% end %>
+                            <p class = 'text-sm text-pal-600 font-semibold yellow-bg px-2 rounded'><%= task.category_name %></p>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <div class = 'w-full flex gap-x-2'>
+                    <div class = 'p-2 flex flex-col justify-center items-center rounded-lg grow'>
+                      <p class = 'text-sm text-neutral-500 font-semibold rounded'>There are no tasks scheduled for today.</p>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class = 'w-1/3 h-full flex flex-col'>
+        
+        <div class = 'w-full h-full'>
+          <div class = 'w-full h-full bg-pal-200 rounded-lg p-4'>
+            <div class = 'w-full h-full overflow-scroll noscroll'>
+              <div class = 'w-full flex gap-x-2'>
+                <div class = 'p-2 bg-zinc-700 size-16 flex justify-center items-center rounded-lg'>
+                  <i class="fa-solid fa-circle-exclamation text-4xl text-white"></i>
+                </div>
+                <div class = 'p-2 size-16 flex flex-col justify-center items-start rounded-lg grow'>
+                  <p class = 'text-lg font-semibold text-white'>Overdue Tasks</p>
+                  <p class = 'text-sm text-neutral-500 font-semibold'><%= @overdue_tasks_count %> Overdue Tasks</p>
+                </div>
+              </div>
+              <div class = 'w-full flex flex-col justify-center items-center py-4 px-4 gap-y-1'>
+                <% if @overdue_tasks_count != 0 %>
+                  <% @overdue_tasks.each do |task| %>
+                    <div class = 'w-full flex'>
+                      <%= link_to category_task_path(task.category_id, task.id), class: 'w-full h-full flex gap-x-2' do %>
+                        <div class = 'p-2 w-16 flex justify-center items-center rounded-lg'>
+                          <i class="fa-regular fa-circle-check text-4xl text-white"></i>
+                        </div>
+                        <div class = 'p-2 flex flex-col justify-center items-start rounded-lg grow'>
+                          <p class = 'text-lg font-semibold text-white'><%= task.name %></p>
+                          <p class = 'text-sm text-neutral-500 font-semibold'><%= task.description %></p>
+                          <p class = 'text-sm text-neutral-500 font-semibold'>Due Date: <%= task.updated_due_date %></p>
+                          <div class = 'flex gap-x-2'>
+                            <% if task.priority_level == 'High'%>
+                              <p class = 'text-sm text-pal-500 font-semibold red-bg px-2 rounded'><%= task.priority_level %> Priority</p>
+                            <% else %>
+                              <p class = 'text-sm text-pal-800 font-semibold green-bg px-2 rounded'><%= task.priority_level %> Priority</p>
+                            <% end %>
+                            <p class = 'text-sm text-pal-600 font-semibold yellow-bg px-2 rounded'><%= task.category_name %></p>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <div class = 'w-full flex gap-x-2'>
+                    <div class = 'p-2 flex flex-col justify-center items-center rounded-lg grow'>
+                      <p class = 'text-sm text-neutral-500 font-semibold rounded'>There are no tasks scheduled for today.</p>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class = 'w-1/3 h-full flex flex-col'>
+        
+        <div class = 'w-full h-full'>
+          <div class = 'w-full h-full bg-pal-200 rounded-lg p-4'>
+            <div class = 'w-full h-full overflow-scroll noscroll'>
+              <div class = 'w-full flex gap-x-2'>
+                <div class = 'p-2 bg-zinc-700 size-16 flex justify-center items-center rounded-lg'>
+                  <i class="fa-solid fa-circle-check text-4xl text-white"></i>
+                </div>
+                <div class = 'p-2 size-16 flex flex-col justify-center items-start rounded-lg grow'>
+                  <p class = 'text-lg font-semibold text-white'>Completed Tasks</p>
+                  <p class = 'text-sm text-neutral-500 font-semibold'><%= @completed_task_count %> Completed Tasks</p>
+                </div>
+              </div>
+              <div class = 'w-full flex flex-col justify-center items-center py-4 px-4 gap-y-1'>
+                <% if @completed_task_count != 0 %>
+                  <% @completed_task.each do |task| %>
+                    <div class = 'w-full flex'>
+                      <%= link_to category_task_path(task.category_id, task.id), class: 'w-full h-full flex gap-x-2' do %>
+                        <div class = 'p-2 w-16 flex justify-center items-center rounded-lg'>
+                          <i class="fa-regular fa-circle-check text-4xl text-white"></i>
+                        </div>
+                        <div class = 'p-2 flex flex-col justify-center items-start rounded-lg grow'>
+                          <p class = 'text-lg font-semibold text-white'><%= task.name %></p>
+                          <p class = 'text-sm text-neutral-500 font-semibold'><%= task.description %></p>
+                          <p class = 'text-sm text-neutral-500 font-semibold'>Due Date: <%= task.updated_due_date %></p>
+                          <div class = 'flex gap-x-2'>
+                            <p class = 'text-sm text-pal-800 font-semibold green-bg px-2 rounded'><%= task.status %></p>
+                            <% if task.priority_level == 'High'%>
+                              <p class = 'text-sm text-pal-500 font-semibold red-bg px-2 rounded'><%= task.priority_level %> Priority</p>
+                            <% else %>
+                              <p class = 'text-sm text-pal-800 font-semibold green-bg px-2 rounded'><%= task.priority_level %> Priority</p>
+                            <% end %>
+                            <p class = 'text-sm text-pal-600 font-semibold yellow-bg px-2 rounded'><%= task.category_name %></p>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <div class = 'w-full flex gap-x-2'>
+                    <div class = 'p-2 flex flex-col justify-center items-center rounded-lg grow'>
+                      <p class = 'text-sm text-neutral-500 font-semibold rounded'>There are no tasks scheduled for today.</p>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<%= @completed_task.inspect%>
+
+
+

@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the "{}" from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+# task1:
+#   name: Task 1
+#   description: Description for Task 1
+#   due_date: 2024-03-06
+#   priority_level: High
+#   status: Pending
+#   category_id: 1
+
+# task2:
+#   name: Task 2
+#   description: Description for Task 2
+#   due_date: 2024-03-07
+#   priority_level: Medium
+#   status: In Progress
+#   category_id: 2

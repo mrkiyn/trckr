@@ -1,0 +1,134 @@
+<div id = 'deleteTaskModal' class = 'h-screen w-full fixed hidden bg-zinc-800 z-index-999 bg-opacity-80 flex-col justify-center items-center shadow-md'>
+  <div class = 'w-3/12 h-fit bg-zinc-700 rounded-lg p-4'>
+    <div class = 'flex justify-end py-2'>
+      <button onclick="closeDeleteTaskModal()" class = 'px-2'><i class="fa-solid fa-x text-sm text-white"></i></button>
+    </div>
+    <div class = 'w-full flex justify-center items-center font-medium text-white'>
+      <p class = 'text-2xl'><i class="fa-solid fa-trash pr-2"></i>Are you sure to Delete this Category?</p>
+    </div>
+    <div class = 'w-full flex justify-center items-center gap-2 py-5'>
+        <%= button_to "Delete", category_task_path(@category, @task), method: :delete, class: "bg-pal-300 text-lg text-white px-4 py-2 rounded-lg shadow-md" %>
+        <button class = 'bg-pal-300  text-lg text-pal-500 px-4 py-2 rounded-lg shadow-md' onclick = 'closeDeleteTaskModal()'>
+          Cancel
+        </button>
+    </div>
+  </div>
+</div>
+
+<div id = 'editTaskModal' class = 'h-screen w-full fixed hidden bg-zinc-800 z-index-999 bg-opacity-80 flex-col justify-center items-center shadow-md'>
+  <div class = 'w-3/12 h-fit bg-zinc-700 rounded-lg p-4'>
+    <div class = 'flex justify-end py-2'>
+      <button onclick="closeEditTaskModal()" class = 'px-2'><i class="fa-solid fa-x text-sm text-white"></i></button>
+    </div>
+    <div class = 'w-full flex justify-center items-center font-medium text-white'>
+      <p class = 'text-2xl'><i class="fa-regular fa-pen-to-square pr-2"></i>Edit <%= @task.name %></p>
+    </div>
+    <div class = 'w-full flex justify-center items-center font-medium text-pal-400'>
+        <%= render partial: 'editTask', locals: {task: @task, category: @category} %>
+    </div>
+  </div>
+</div>
+
+<div class = "w-full flex">
+  <%= render 'shared/sidebar' %>
+  <div class = 'grow h-screen px-7 py-5 flex flex-col justify-between gap-4 items-center'>
+    <div class = 'w-full h-full flex flex-col bg-pal-200 rounded-lg'>
+      <div class = 'h-fit w-full flex'>
+        <div class = 'grow p-4 flex flex-col gap-2'>
+          <p class = "text-3xl text-white"><i class="fa-solid fa-list-check pr-2"></i><%= @task.name %></p>
+          <p class = "text-md text-pal-600 yellow-bg w-fit px-2 rounded"><%= @task_category.name %></p>
+        </div>
+        <div class = 'w-2/6 p-4 flex gap-2 justify-center items-center'>
+          <%= form_with(model: @task, url: category_task_path(@category, @task), class: 'w-2/4') do |form| %>
+            <% if @task.status == 'Pending'%>
+              <div class="hidden">
+               
+                <%= form.date_field :due_date %>
+                <%= form.select :status, ['Completed'] %>
+              </div>
+
+              <div class="w-full">
+                  <%= button_to category_task_path(@category, @task), method: :put, class: "w-full bg-pal-100 text-white rounded-lg py-2 shadow-md" do %>
+                    <i class="fa-solid fa-check-double pr-2"></i> Mark As Completed
+                  <% end %>
+              </div>
+            <% else %>
+              <div class="hidden">
+                <%= form.date_field :due_date %>
+                <%= form.select :status, ['Pending'] %>
+              </div>
+
+              <div class="w-full">
+                  <%= button_to category_task_path(@category, @task), method: :put, class: "w-full bg-pal-100 text-white rounded-lg py-2 shadow-md" do %>
+                    <i class="fa-solid fa-xmark pr-2"></i> Unmark As Completed
+                  <% end %>
+              </div>
+            <% end %>
+          <% end %>
+          <button class = 'w-1/4 bg-pal-100 text-white rounded-lg py-2 shadow-md' onclick = 'openEditTaskModal()'><i class="fa-solid fa-pen-to-square pr-2"></i>Edit</button>
+          <button class = 'w-1/4 bg-pal-100 text-white rounded-lg py-2 shadow-md' onclick = 'openDeleteTaskModal()'><i class="fa-solid fa-trash pr-2"></i>Delete</button>
+        </div>
+      </div>
+
+      <div class = 'grow flex flex-col'>
+        <p class = 'text-pal-800 text-center w-full'><%= notice %></p>
+        <p class = 'text-pal-500 text-center w-full'><%= alert %></p>
+        <div class = 'grow p-4 flex flex-col gap-2'>
+          <p class = "text-2xl text-white">Task Details:</p>
+          <p class = "text-lg text-neutral-500">Description: <%= @task.description %></p>
+          <p class = "text-lg text-neutral-500">
+            Submit on or before: <%= @task.due_date.strftime('%m-%d-%Y') %>
+            <% if Date.today > @task.due_date && @task.status === 'Pending' %>
+              (Overdue)
+            <% end %>
+          </p>
+          <p class = "text-lg text-neutral-500">Priority Level: <%= @task.priority_level %></p>
+          <p class = "text-lg text-neutral-500">Status: <%= @task.status %></p>
+          <p class = "text-lg text-neutral-500">Created on: <%= @task.created_at.strftime('%m-%d-%Y') %></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+
+  var editTaskModal = document.getElementById('editTaskModal');
+
+  function openEditTaskModal() {
+      editTaskModal.style.display = 'flex';
+  }
+
+  function closeEditTaskModal() {
+      editTaskModal.style.display = 'none';
+  }
+
+  editTaskModal.addEventListener('click', function(event) {
+    if (event.target === editTaskModal) {
+      closeEditTaskModal();
+    }
+  });
+
+  var deleteModal = document.getElementById('deleteTaskModal');
+
+  function openDeleteTaskModal() {
+      deleteModal.style.display = 'flex';
+  }
+
+  function closeDeleteTaskModal() {
+      deleteModal.style.display = 'none';
+  }
+
+  deleteModal.addEventListener('click', function(event) {
+    if (event.target === deleteModal) {
+      closeDeleteTaskModal();
+    }
+  });
+
+</script>
+
+
+

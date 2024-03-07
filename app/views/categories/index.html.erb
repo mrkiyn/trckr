@@ -1,0 +1,91 @@
+<div id = 'addNewCategoryModal' class = 'h-screen w-full fixed hidden bg-zinc-800 z-index-999 bg-opacity-80 flex-col justify-center items-center shadow-md'>
+  <div class = 'w-3/12 h-fit bg-zinc-700 rounded-lg p-4'>
+    <div class = 'flex justify-end py-2'>
+      <button onclick="closeAddNewCategoryModal()" class = 'px-2'><i class="fa-solid fa-x text-sm text-white"></i></button>
+    </div>
+    <div class = 'w-full flex justify-center items-center font-medium text-white'>
+      <p class = 'text-2xl'><i class="fa-regular fa-pen-to-square pr-2"></i>Add New Category</p>
+    </div>
+    <div class = 'w-full flex justify-center items-center font-medium text-pal-400'>
+        <%= render partial: 'categoryForm', locals: {category: @category} %>
+    </div>
+  </div>
+</div>
+
+<div class = "w-full flex">
+  <%= render 'shared/sidebar' %>
+  <div class = 'grow h-screen px-7 py-5 flex flex-col justify-between gap-4 items-center'>
+    <div class = 'w-full bg-pal-200 p-4 rounded-lg flex flex-col gap-2'>
+      <p class = "text-3xl text-white"><i class="fa-solid fa-layer-group pr-2"></i>Categories</p>
+      <p class = "text-md text-neutral-500">You have a total of <%= @total_no_of_categories %> Categories.</p>
+    </div>
+    
+    <div class = 'grow w-full bg-pal-200 p-4 rounded-lg flex flex-col justify-start items-start overflow-scroll noscroll'>
+      <p class = 'text-pal-800 text-center w-full'><%= notice %></p>
+      <p class = 'text-pal-500 text-center w-full'><%= alert %></p>
+      <table class = 'w-full text-center rounded-lg border-separate border-spacing-y-2'>
+        <thead>
+          <tr class = 'text-white text-lg'>
+            <th class = 'w-2/12 py-4'>CATEGORY NAME</th>
+            <th class = 'grow py-4'>CATEGORY DESCRIPTION</th>
+            <th class = 'w-2/12 py-4'>TASKS INFORMATION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="text-white text-xl">
+            <td class="w-2/12 border-2 border-zinc-700 rounded-lg" colspan="4">
+              <button class = 'h-full w-full py-4' onclick="openAddNewCategoryModal()">  
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </td>
+          </tr>
+          <% @categories.each do |category| %>
+            <tr class = 'text-white text-lg bg-pal-200'>
+              <td class = 'w-2/12 py-4'>
+                <%= link_to category_path(category), class: 'w-full h-full flex justify-center items-center py-1 underline underline-offset-4' do %>
+                    <%= category.name %>
+                <% end %>
+              </td>
+              <td class = 'grow py-4'><%= category.description %></td>
+              <td class = 'w-2/12 py-4'>
+                <div class = 'flex flex-col gap-1'>
+                  <div class = 'flex gap-2 justify-center'>
+                    <p class = 'text-sm rounded green-bg px-2 text-pal-800 w-fit'><%= category.pending_task_count %> Pending Tasks</p>
+                  </div>
+                  <div class = 'flex gap-2 justify-center'>
+                    <p class = 'text-sm rounded red-bg px-2 text-pal-500'><%= category.high_priority_task_count %> High Priority</p>
+                    <p class = 'text-sm rounded red-bg px-2 text-pal-500'><%= category.overdue_task_count %> Overdue</p>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  var modal = document.getElementById('addNewCategoryModal');
+
+  function openAddNewCategoryModal() {
+      modal.style.display = 'flex';
+  }
+
+  function closeAddNewCategoryModal() {
+      modal.style.display = 'none';
+  }
+
+  addNewCategoryModal.addEventListener('click', function(event) {
+    if (event.target === addNewCategoryModal) {
+      closeAddNewCategoryModal();
+    }
+  });
+
+</script>
+
+
+
