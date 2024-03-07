@@ -1,8 +1,10 @@
-iyan:
-  email: "iyan@example.com"
-  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+one: {
+  email: "test1@test.com"
+}
 
-
+two: {
+  email: "test2@test.com"
+}
 
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
