@@ -9,7 +9,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to category_path(@category), notice: 'Task was successfully created.'
     else
-      redirect_to category_path(@category), alert: 'Task creation failed. Please try again. Due date must me today onwards.'
+      redirect_to category_path(@category), alert: 'Error. Due date must me today onwards.'
     end
   end
 

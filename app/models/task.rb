@@ -1,6 +1,6 @@
 class Task < ApplicationRecord
   validates :name, presence: true
-  validates :description, presence: true
+
   validates :due_date, presence: true
   validates :priority_level, inclusion: { in: ['Low', 'High'] }
   validates :status, inclusion: { in: ['Pending', 'Completed'] }

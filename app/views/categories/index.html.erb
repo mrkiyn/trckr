@@ -21,7 +21,9 @@
     </div>
     
     <div class = 'grow w-full bg-pal-200 p-4 rounded-lg flex flex-col justify-start items-start overflow-scroll noscroll'>
-      <p class = 'text-pal-800 text-center w-full'><%= notice %></p>
+      <% if notice == 'Category was successfully saved.' %>
+        <p class = 'text-pal-800 text-center w-full'><%= notice %></p>
+      <% end %>
       <p class = 'text-pal-500 text-center w-full'><%= alert %></p>
       <table class = 'w-full text-center rounded-lg border-separate border-spacing-y-2'>
         <thead>
@@ -34,7 +36,7 @@
         <tbody>
           <tr class="text-white text-xl">
             <td class="w-2/12 border-2 border-zinc-700 rounded-lg" colspan="4">
-              <button class = 'h-full w-full py-4' onclick="openAddNewCategoryModal()">  
+              <button id="add-category-button" class = 'h-full w-full py-4' onclick="openAddNewCategoryModal()">  
                 <i class="fa-solid fa-plus"></i>
               </button>
             </td>

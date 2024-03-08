@@ -4,14 +4,14 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-# task1:
+task1:
 
-#   name: Task 1
-#   description: Description for Task 1
-#   due_date: 2024-03-06
-#   priority_level: High
-#   status: Pending
-#   category_id: 1
+  name: Task 1
+  description: Description for Task 1
+  due_date: 2024-03-06
+  priority_level: High
+  status: Pending
+  category: category1
 
 # task2:
 #   name: Task 2
