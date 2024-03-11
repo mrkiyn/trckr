@@ -42,8 +42,6 @@
           <%= form_with(model: @task, url: category_task_path(@category, @task), class: 'w-2/4') do |form| %>
             <% if @task.status == 'Pending'%>
               <div class="hidden">
-               
-                <%= form.date_field :due_date %>
                 <%= form.select :status, ['Completed'] %>
               </div>
 
@@ -54,7 +52,6 @@
               </div>
             <% else %>
               <div class="hidden">
-                <%= form.date_field :due_date %>
                 <%= form.select :status, ['Pending'] %>
               </div>
 

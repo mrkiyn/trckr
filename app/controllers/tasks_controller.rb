@@ -1,5 +1,4 @@
 class TasksController < ApplicationController
-  before_action :authenticate_user!
   before_action :find_category
   before_action :find_task, only: [:destroy]
   
@@ -15,9 +14,9 @@ class TasksController < ApplicationController
 
   def update
     @task = @category.tasks.find(params[:id])
-
+  
     if @task.update(task_params)
-      redirect_to category_task_path(@category, @task), notice: "Category was successfully updated."
+      redirect_to category_task_path(@category, @task), notice: "Task was successfully updated."
     else
       redirect_to category_task_path(@category, @task), alert: "Something Happened. Please Try Again"
     end

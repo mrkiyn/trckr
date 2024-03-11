@@ -1,5 +1,4 @@
 class CategoriesController < ApplicationController
-  before_action :authenticate_user!
 
   def index
     @total_no_of_categories = current_user.categories.count # For Header

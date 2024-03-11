@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :categories, except: [:new, :edit] do
     resources :tasks, except: [:index, :new, :edit]
   end
+  
   root 'main#home'
   
 end
