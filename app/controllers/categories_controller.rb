@@ -41,8 +41,10 @@ class CategoriesController < ApplicationController
     @tasks_count = @category.tasks.count
 
     @current_date = Date.today
-    @tasks = current_user.tasks.select("*, TO_CHAR(tasks.due_date, 'MM-DD-YYYY') AS formatted_due_date")
+    @tasks = current_user.tasks.select("tasks.*, TO_CHAR(tasks.due_date, 'MM-DD-YYYY') AS formatted_due_date")
+                               .where("tasks.category_id = ?", @category)
                                .order("status DESC, formatted_due_date")
+                         
     @task = @category.tasks.build  
   end
 

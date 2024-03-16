@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :find_category
-  before_action :find_task, only: [:destroy]
+  before_action :find_task, only: [:update, :show, :destroy]
   
   def create
     @task = @category.tasks.new(task_params)
@@ -13,7 +13,6 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = @category.tasks.find(params[:id])
   
     if @task.update(task_params)
       redirect_to category_task_path(@category, @task), notice: "Task was successfully updated."
@@ -23,7 +22,6 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = @category.tasks.find(params[:id])
     @task_category = Category.find(@task.category_id)
   end
 
@@ -41,7 +39,7 @@ class TasksController < ApplicationController
 
 
   def find_category
-    @category = Category.find(params[:category_id])
+    @category = current_user.categories.find(params[:category_id])
   end
 
   def find_task
