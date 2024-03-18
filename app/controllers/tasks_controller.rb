@@ -22,14 +22,12 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task_category = Category.find(@task.category_id)
   end
 
   def destroy
       @task.destroy
       redirect_to category_path(@category), notice: "Task successfully deleted."
   end
-
 
   private
 
